@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6 AI Archetypes: Interactive User Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #07080d;
+      --bg-card: rgba(18, 20, 32, 0.7);
+      --bg-card-hover: rgba(24, 26, 42, 0.9);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(124, 77, 255, 0.3);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      
+      /* Accent Colors */
+      --primary: #7c4dff;
+      --primary-glow: rgba(124, 77, 255, 0.15);
+      --accent-purple: #c51162;
+      --accent-green: #00e676;
+      --accent-green-glow: rgba(0, 230, 118, 0.15);
+      --accent-blue: #00b0ff;
+      --accent-blue-glow: rgba(0, 176, 255, 0.15);
+      --accent-orange: #ff9100;
+      --accent-orange-glow: rgba(255, 145, 0, 0.15);
+      --accent-red: #ff5252;
+      --accent-red-glow: rgba(255, 82, 82, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+      padding: 2.5rem;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Background Glows */
+    .glow-bg-1 {
+      position: fixed;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--primary-glow) 0%, rgba(0,0,0,0) 70%);
+      top: -250px;
+      left: -250px;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .glow-bg-2 {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-blue-glow) 0%, rgba(0,0,0,0) 70%);
+      bottom: -150px;
+      right: -150px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    header {
+      max-width: 1200px;
+      margin: 0 auto 3rem auto;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .title-area h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #fff 40%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .title-area p {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      font-weight: 400;
+    }
+
+    .badge-framework {
+      background: linear-gradient(135deg, var(--primary), var(--accent-purple));
+      color: #fff;
+      padding: 0.5rem 1.2rem;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      box-shadow: 0 4px 15px rgba(124, 77, 255, 0.25);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2.5rem;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-glow);
+      box-shadow: 0 12px 40px rgba(124, 77, 255, 0.08);
+    }
+
+    .card-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .card-title .icon {
+      font-size: 1.8rem;
+    }
+
+    /* Grid layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Interactive Archetype Explorer */
+    .archetype-selector {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+    }
+
+    .arch-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.75rem 1.25rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .arch-btn:hover {
+      color: #fff;
+      border-color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .arch-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 15px var(--primary-glow);
+    }
+
+    .arch-content {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .arch-content.active {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 2.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .arch-content.active {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .arch-detail h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .arch-detail p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .rule-tag {
+      background: rgba(124, 77, 255, 0.08);
+      border: 1px solid var(--primary);
+      color: #fff;
+      font-size: 0.85rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .badge-subagent {
+      background: rgba(0, 176, 255, 0.08);
+      border: 1px solid var(--accent-blue);
+      color: var(--accent-blue);
+      font-size: 0.8rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      margin-left: 0.5rem;
+      display: inline-block;
+    }
+
+    /* Bullet List with icons */
+    .checklist {
+      list-style-type: none;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .checklist li {
+      position: relative;
+      padding-left: 2rem;
+      color: var(--text-main);
+    }
+
+    .checklist li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent-green);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .checklist.critic li::before {
+      content: '⚠';
+      color: var(--accent-orange);
+    }
+
+    /* Code styling */
+    pre {
+      background: #030407;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #e2e8f0;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .code-comment {
+      color: #51b155;
+    }
+
+    .code-keyword {
+      color: #ff7b72;
+    }
+
+    .code-string {
+      color: #a5d6ff;
+    }
+
+    /* Workflow Diagram */
+    .workflow-box {
+      background: rgba(255,255,255,0.01);
+      border: 1px dashed var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    /* Keyframe Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Interactive Grilling Simulator */
+    .simulation-box {
+      background: #030407;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      height: 320px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .sim-line {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .sim-sender {
+      font-weight: bold;
+    }
+
+    .sim-sender.agent {
+      color: var(--accent-blue);
+    }
+
+    .sim-sender.user {
+      color: var(--accent-green);
+    }
+
+    .sim-btn-group {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .sim-action-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .sim-action-btn:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-bg-1"></div>
+  <div class="glow-bg-2"></div>
+
+  <header>
+    <div class="title-area">
+      <h1>6 AI Archetypes</h1>
+      <p>Interactive Framework Guide & Best Practices</p>
+    </div>
+    <div class="badge-framework">Unified Stack v3.0</div>
+  </header>
+
+  <main>
+
+    <!-- Executive Summary Card -->
+    <section class="card">
+      <h2 class="card-title"><span class="icon">🌀</span> The Paradigm: Glass Box Orchestration</h2>
+      <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+        By transitioning from **"Black Box Automation"** to **"Glass Box Orchestration"**, this skill gives you complete visibility, control, and learning opportunities during complex coding sessions. It incorporates the safety-critical sandboxing of the **Vector Protocol** to guarantee code safety and execution predictability.
+      </p>
+      
+      <div class="grid-2">
+        <div style="background: rgba(124, 77, 255, 0.03); border: 1px solid rgba(124, 77, 255, 0.15); padding: 1.5rem; border-radius: 12px;">
+          <h4 style="margin-bottom: 0.5rem; color: var(--primary);">🛡️ Vector Guardrails</h4>
+          <p style="font-size: 0.95rem; color: var(--text-muted);">
+            Ensures all code operations are isolated in fractal sub-task folders, verified via automated test loops, capped by robust retry circuit breakers, and strictly grounded in repository evidence.
+          </p>
+        </div>
+        <div style="background: rgba(0, 230, 118, 0.03); border: 1px solid rgba(0, 230, 118, 0.15); padding: 1.5rem; border-radius: 12px;">
+          <h4 style="margin-bottom: 0.5rem; color: var(--accent-green);">🏫 Pedagogical Growth</h4>
+          <p style="font-size: 0.95rem; color: var(--text-muted);">
+            Ensures you aren't left with an opaque, modified codebase. The Teacher archetype steps in to break down architecture patterns, map callers, and challenge you with interactive follow-ups.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Archetype Deep Dive -->
+    <section class="card">
+      <h2 class="card-title"><span class="icon">🧭</span> Interactive Archetype Explorer</h2>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Select an archetype below to explore its behavioral rules, safeguards, and output examples.</p>
+      
+      <div class="archetype-selector">
+        <button class="arch-btn active" onclick="showArchetype(event, 'scholar')">🎓 1. Scholar</button>
+        <button class="arch-btn" onclick="showArchetype(event, 'analyst')">🕵️ 2. Analyst</button>
+        <button class="arch-btn" onclick="showArchetype(event, 'architect')">📐 3. Architect</button>
+        <button class="arch-btn" onclick="showArchetype(event, 'producer')">🛠️ 4. Producer</button>
+        <button class="arch-btn" onclick="showArchetype(event, 'advisor')">🛡️ 5. Advisor</button>
+        <button class="arch-btn" onclick="showArchetype(event, 'teacher')">🏫 6. Teacher</button>
+      </div>
+
+      <!-- SCHOLAR CONTENT -->
+      <div id="arch-scholar" class="arch-content active">
+        <div class="arch-detail">
+          <span class="rule-tag">Mandatory Grounding</span>
+          <h3>The Scholar <span class="badge-subagent">context-collector</span></h3>
+          <p>The Scholar establishes a verified knowledge baseline. Before drafting plans or proposing code structure, the Scholar must inspect the repository's starting state and documentation.</p>
+          <ul class="checklist">
+            <li>Checks local files and configuration rules (`AGENTS.md`, `CLAUDE.md`, `CONTEXT.md`).</li>
+            <li>Executes web search or MCP lookups if 3rd-party dependencies are involved.</li>
+            <li>Rejects all ungrounded assertions immediately.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Example Output</h4>
+          <pre><span class="code-comment"># Ingestion Phase Complete</span>
+- Grounded codebase files parsed: 14 files.
+- Active dependency tree checked via `package.json`.
+- Cited Evidence ID: `[E-101]` mapped to local README.</pre>
+        </div>
+      </div>
+
+      <!-- ANALYST CONTENT -->
+      <div id="arch-analyst" class="arch-content">
+        <div class="arch-detail">
+          <span class="rule-tag" style="background: rgba(255, 145, 0, 0.08); border-color: var(--accent-orange);">Interactive Grilling</span>
+          <h3>The Analyst <span class="badge-subagent">idea-refiner</span></h3>
+          <p>The Analyst challenges confirmation bias, pinpoints high-risk dependencies, and conducts an interactive dialogue (grilling session) to sharpen requirements before code is written.</p>
+          <ul class="checklist">
+            <li>Triggers interactive Socratic questionnaires for vague ideas.</li>
+            <li>Asks questions **one at a time** to prevent cognitive overload.</li>
+            <li>Uses the `/grill-me`, `grill-with-docs`, and `interview-me` skills implicitly.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Interactive Simulator</h4>
+          <div class="simulation-box" id="grill-sim">
+            <div class="sim-line">
+              <span class="sim-sender agent">[Analyst]:</span>
+              <span>I see we want to add an OAuth login flow. Before I structure the plan, let's refine this: Are we storing the tokens in-memory, or do we require secure local cookie storage? (Question 1/3)</span>
+            </div>
+          </div>
+          <div class="sim-btn-group">
+            <button class="sim-action-btn" onclick="simReply('In-memory is fine for this prototype!')">Reply: In-memory</button>
+            <button class="sim-action-btn" onclick="simReply('Let\'s use secure HTTP-only cookies.')">Reply: Secure Cookies</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARCHITECT CONTENT -->
+      <div id="arch-architect" class="arch-content">
+        <div class="arch-detail">
+          <span class="rule-tag" style="background: rgba(0, 176, 255, 0.08); border-color: var(--accent-blue);">Symmetrical Deconstruction</span>
+          <h3>The Architect <span class="badge-subagent">planner</span></h3>
+          <p>The Architect maps out the structural, interface, and test roadmap. This splits design thinking from code implementation.</p>
+          <ul class="checklist">
+            <li>Drafts a structured `PLAN.md` with explicit milestones.</li>
+            <li>Clusters parallelizable independent tasks into execution batches.</li>
+            <li>Enforces the **Breakpoint Protocol**, prompting you before commencing execution.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Breakpoint Prompt Pattern</h4>
+          <pre><span class="code-comment"># 📐 Strategy Phase Approved</span>
+The tactical roadmap has been generated in `.gemini/PLAN.md`.
+
+*Question:* Should we execute the full plan end-to-end, 
+or would you prefer breakpoints at each transition?</pre>
+        </div>
+      </div>
+
+      <!-- PRODUCER CONTENT -->
+      <div id="arch-producer" class="arch-content">
+        <div class="arch-detail">
+          <span class="rule-tag" style="background: rgba(0, 230, 118, 0.08); border-color: var(--accent-green);">Critique Loop + Sandboxing</span>
+          <h3>The Producer <span class="badge-subagent">implementer</span></h3>
+          <p>The Producer runs the actual implementation swarms. To ensure state integrity, all operations are isolated in sandboxed directories and validated through rigorous unit-testing loops.</p>
+          <ul class="checklist">
+            <li>Isolates tasks in `.gemini/tasks/task-ID/` paths to avoid file conflicts.</li>
+            <li>Uses an autonomous `Implement -> Test -> Critique` verification cycle.</li>
+            <li>Stops immediately if it hits the **Circuit Breaker (`MAX_ITERATIONS=3`)** retry limit.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Producer State Tracker</h4>
+          <pre><span class="code-comment"># 🛠️ Producer Execution Loop</span>
+- Active Sandbox: `.gemini/tasks/task-402/`
+- Iteration: `2 / 3`
+- Test Output: <span style="color: var(--accent-red);">Failed (Import Error)</span>
+- Action: Resolving path aliasing. Retrying execution loop...</pre>
+        </div>
+      </div>
+
+      <!-- ADVISOR CONTENT -->
+      <div id="arch-advisor" class="arch-content">
+        <div class="arch-detail">
+          <span class="rule-tag" style="background: rgba(255, 82, 82, 0.08); border-color: var(--accent-red);">Evidence & Citation</span>
+          <h3>The Advisor <span class="badge-subagent">critic</span></h3>
+          <p>The Advisor acts as a skeptical auditor, reviewing code and ensuring every decision is properly justified and mapped to verified logs.</p>
+          <ul class="checklist">
+            <li>Conducts multi-axis code reviews (security, performance, architectural fit).</li>
+            <li>Records and links outcomes to the **Evidence Ledger** (`EVIDENCE.md`).</li>
+            <li>Ensures strict citation hygiene: everything must reference `[E-XYZ]`.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Advisor Audit Log</h4>
+          <pre><span class="code-comment"># 🛡️ Advisor Audit Report</span>
+- Verified Codebase Diff: PASS `[E-219]`
+- Security Hardening Check: PASS `[E-220]`
+- Structural Risk Checklist: Complete.
+- Authoritative Evidence linked to `.gemini/EVIDENCE.md`.</pre>
+        </div>
+      </div>
+
+      <!-- TEACHER CONTENT -->
+      <div id="arch-teacher" class="arch-content">
+        <div class="arch-detail">
+          <span class="rule-tag" style="background: rgba(124, 77, 255, 0.08); border-color: var(--primary);">Mentorship & Pedagogy</span>
+          <h3>The Teacher <span class="badge-subagent">educator</span></h3>
+          <p>The Teacher translates completed code changes into accessible knowledge, mapping abstractions, explaining trade-offs, and ensuring you learn from every modification.</p>
+          <ul class="checklist">
+            <li>Builds conceptual mental models with Mermaid.js architecture diagrams.</li>
+            <li>Annotates critical code sections line-by-line.</li>
+            <li>Provides mini Socratic exercises to help you practice and verify understanding.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Educational Feedback Card</h4>
+          <pre><span class="code-comment"># 🏫 Mental Model: Async State Locking</span>
+We used a mutex in `index.js#L42` to avoid race conditions.
+
+*Try this:* What happens if thread A is interrupted 
+before the lock releases? How did we handle that on L48?</pre>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Implicit Skills Review -->
+    <section class="card">
+      <h2 class="card-title"><span class="icon">🔌</span> Implicit Skills Integration</h2>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">How the merged framework automatically activates other specialized skills in your directory.</p>
+      
+      <div class="grid-2">
+        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 12px;">
+          <h4 style="color: var(--accent-blue); margin-bottom: 0.5rem;">🎓 Grounding & Context Ingestion</h4>
+          <ul class="checklist">
+            <li>`context-engineering`: Establishes the workspace files first.</li>
+            <li>`source-driven-development`: Verifies documentation and web specs.</li>
+            <li>`discovering-gcp-data-assets`: Discovers BQ and SQL schemas in-context.</li>
+          </ul>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 12px;">
+          <h4 style="color: var(--accent-orange); margin-bottom: 0.5rem;">🕵️ Refinement & Grilling</h4>
+          <ul class="checklist">
+            <li>`interview-me`: Extracts user requirements socratically.</li>
+            <li>`grill-me` / `grill-with-docs`: Pressure-tests technical roadmaps.</li>
+            <li>`idea-refine`: Sharpens vague ideas into concrete specs.</li>
+          </ul>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 12px;">
+          <h4 style="color: var(--accent-green); margin-bottom: 0.5rem;">🛠️ Building & Verification</h4>
+          <ul class="checklist">
+            <li>`incremental-implementation`: Writes modular edits.</li>
+            <li>`test-driven-development` / `tdd`: Assures code correctness.</li>
+            <li>`code-simplification`: Clean refactoring loops.</li>
+          </ul>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 12px;">
+          <h4 style="color: var(--accent-red); margin-bottom: 0.5rem;">🛡️ Auditing & Teaching</h4>
+          <ul class="checklist">
+            <li>`code-review-and-quality`: Strict multi-axis code audits.</li>
+            <li>`security-and-hardening`: Mitigates XSS, injection, or leak bugs.</li>
+            <li>`codelab-creator`: Generates structured tutorials.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="max-width: 1200px; margin: 3rem auto 0 auto; text-align: center; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border-color); padding-top: 2rem;">
+    Advanced Agentic Coding Framework &copy; 2026. Consolidating the Vector and 5 AI Archetypes.
+  </footer>
+
+  <script>
+    function showArchetype(event, archetypeId) {
+      // Deactivate all archetype selector buttons
+      document.querySelectorAll('.arch-btn').forEach(btn => btn.classList.remove('active'));
+      // Hide all archetype content panels
+      document.querySelectorAll('.arch-content').forEach(panel => panel.classList.remove('active'));
+
+      // Activate clicked button and target panel
+      event.currentTarget.classList.add('active');
+      document.getElementById('arch-' + archetypeId).classList.add('active');
+    }
+
+    let simStep = 1;
+    function simReply(text) {
+      const box = document.getElementById('grill-sim');
+      
+      // User reply
+      const userDiv = document.createElement('div');
+      userDiv.className = 'sim-line';
+      userDiv.innerHTML = `<span class="sim-sender user">[User]:</span> <span>\${text}</span>`;
+      box.appendChild(userDiv);
+      box.scrollTop = box.scrollHeight;
+
+      // Agent thinking state...
+      setTimeout(() => {
+        const agentDiv = document.createElement('div');
+        agentDiv.className = 'sim-line';
+        
+        if (simStep === 1) {
+          agentDiv.innerHTML = `<span class="sim-sender agent">[Analyst]:</span> <span>Understood. Mapped preference: \${text}. Next: Which OAuth provider should we use (Google or GitHub)? (Question 2/3)</span>`;
+          simStep = 2;
+        } else if (simStep === 2) {
+          agentDiv.innerHTML = `<span class="sim-sender agent">[Analyst]:</span> <span>Understood. Refined requirements recorded. Proceeding to **Architect** stage to structure implementation plan!</span>`;
+          simStep = 3;
+        } else {
+          agentDiv.innerHTML = `<span class="sim-sender agent">[Analyst]:</span> <span>Refinement session concluded. We are ready to execute!</span>`;
+        }
+        
+        box.appendChild(agentDiv);
+        box.scrollTop = box.scrollHeight;
+      }, 800);
+    }
+  </script>
+</body>
+</html>
