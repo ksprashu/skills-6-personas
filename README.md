@@ -15,11 +15,11 @@ flowchart LR
     Scholar[1. Scholar<br>Context & Ingest] ──> Analyst[2. Analyst<br>Grilling & Refine]
     Analyst ──> Architect[3. Architect<br>Tactical Plan]
     Architect ──> Producer[4. Producer<br>Isolated Sandbox]
-    Producer ──> Advisor[5. Advisor<br>Audit & Citations]
-    Advisor ──> Teacher[6. Teacher<br>Pedagogy & Models]
+    Producer ──> Auditor[5. Auditor<br>Audit & Citations]
+    Auditor ──> Teacher[6. Teacher<br>Pedagogy & Models]
     
     classDef archetypes fill:#0e101f,stroke:#7c4dff,stroke-width:2px,color:#fff;
-    class Scholar,Analyst,Architect,Producer,Advisor,Teacher archetypes;
+    class Scholar,Analyst,Architect,Producer,Auditor,Teacher archetypes;
 ```
 
 ### 1. 🎓 The Scholar (Context & Grounding)
@@ -38,7 +38,7 @@ flowchart LR
 *   **Role**: Runs implementation work in parallel, isolated sandbox subdirectories, utilizing robust `Implement ➔ Test ➔ Critique` loops.
 *   **Vector Safeguard**: Integrates a circuit breaker capping failed attempts at `MAX_ITERATIONS=3` before escalating back to the Architect or User.
 
-### 5. 🛡️ The Advisor (Risk Audit & Citation Hygiene)
+### 5. 🛡️ The Auditor (Risk Audit & Citation Hygiene)
 *   **Role**: Acts as a senior security auditor and quality gates controller, verifying license compliance, credentials safety, and regression tests.
 *   **Vector Safeguard**: Enforces **Citation Hygiene** by requiring all outcomes, tests, and metrics to reference verified Evidence IDs in `.gemini/EVIDENCE.md`.
 
@@ -87,7 +87,7 @@ When running in step-by-step mode, the agent pauses after completing each archet
 I've concluded the [archetype] stage and [actions taken] - the output is visible at [asset]. Revise or proceed?
 ```
 
-*   **[archetype]**: Stage just completed (Scholar, Analyst, Architect, Producer, Advisor, Teacher).
+*   **[archetype]**: Stage just completed (Scholar, Analyst, Architect, Producer, Auditor, Teacher).
 *   **[actions taken]**: Bulleted highlights of completed actions and grounding evidence.
 *   **[asset]**: Absolute markdown file link to the active working file or artifact.
 

@@ -2,7 +2,7 @@
 name: six-archetypes
 description: >-
   Articulates the stages of task completion using the 6 AI Archetypes framework
-  (Scholar, Analyst, Architect, Producer, Advisor, Teacher). Use when starting any
+  (Scholar, Analyst, Architect, Producer, Auditor, Teacher). Use when starting any
   reasonably sized task, research project, feature implementation, or planning
   deliverable that requires critical thinking, execution, verification, and learning.
   Directs the agent to structure implementation plans around the six archetypes,
@@ -25,11 +25,11 @@ flowchart TD
     Scholar[1. The Scholar<br>Context & Grounding] --> Analyst[2. The Analyst<br>Grilling & Refinement]
     Analyst --> Architect[3. The Architect<br>Tactical Plan & Breakpoints]
     Architect --> Producer[4. The Producer<br>Swarms & Verification]
-    Producer --> Advisor[5. The Advisor<br>Audit & Citations]
-    Advisor --> Teacher[6. The Teacher<br>Pedagogy & Mental Models]
+    Producer --> Auditor[5. The Auditor<br>Audit & Citations]
+    Auditor --> Teacher[6. The Teacher<br>Pedagogy & Mental Models]
     
     classDef archetypes fill:#1a1c2d,stroke:#7c4dff,stroke-width:2px,color:#fff;
-    class Scholar,Analyst,Architect,Producer,Advisor,Teacher archetypes;
+    class Scholar,Analyst,Architect,Producer,Auditor,Teacher archetypes;
 ```
 
 ### 1. 🎓 The Scholar (Context & Ingest)
@@ -56,7 +56,7 @@ flowchart TD
 *   **Circuit Breaker**: Limit retries to a hard cap of **`MAX_ITERATIONS=3`**. If a test or validation fails repeatedly, halt and escalate back to the Architect or User.
 *   **Implicit Skills**: Integrates with `incremental-implementation`, `tdd`, `test-driven-development`, and `frontend-ui-engineering`.
 
-### 5. 🛡️ The Advisor (Risk Audit & Citation Hygiene)
+### 5. 🛡️ The Auditor (Risk Audit & Citation Hygiene)
 *   **Role**: Acts as a senior code reviewer, security auditor, or skeptical stakeholder to critique and harden the output.
 *   **Citation Hygiene**: Every factual assertion, test success, or build run must reference a specific Evidence ID (`[E-XYZ]`) recorded in `.gemini/EVIDENCE.md`.
 *   **Risk Audit**: Conduct an internal risk assessment answering:
@@ -83,7 +83,7 @@ When running with step-by-step breakpoints, pause after completing the work of e
 I've concluded the [archetype] stage and [actions taken] - the output is visible at [asset]. Revise or proceed?
 ```
 
-*   **[archetype]**: The stage just completed (Scholar, Analyst, Architect, Producer, Advisor, Teacher).
+*   **[archetype]**: The stage just completed (Scholar, Analyst, Architect, Producer, Auditor, Teacher).
 *   **[actions taken]**: A concise 1-2 sentence summary of what was accomplished and grounding evidence cited.
 *   **[asset]**: Clickable markdown file link to the artifact or code.
 
