@@ -1,5 +1,5 @@
 ---
-name: five-archetypes
+name: six-archetypes
 description: >-
   Articulates the stages of task completion using the 6 AI Archetypes framework
   (Scholar, Analyst, Architect, Producer, Advisor, Teacher). Use when starting any
