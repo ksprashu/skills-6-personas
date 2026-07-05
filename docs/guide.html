@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>6 AI Archetypes: Interactive User Guide</title>
+  <title>6 AI Personas: Interactive User Guide</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -159,8 +159,8 @@
       }
     }
 
-    /* Interactive Archetype Explorer */
-    .archetype-selector {
+    /* Interactive Persona Explorer */
+    .persona-selector {
       display: flex;
       gap: 0.75rem;
       flex-wrap: wrap;
@@ -169,7 +169,7 @@
       padding-bottom: 1rem;
     }
 
-    .arch-btn {
+    .persona-btn {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border-color);
       color: var(--text-muted);
@@ -185,37 +185,37 @@
       transition: all 0.2s ease;
     }
 
-    .arch-btn:hover {
+    .persona-btn:hover {
       color: #fff;
       border-color: var(--text-muted);
       background: rgba(255, 255, 255, 0.06);
     }
 
-    .arch-btn.active {
+    .persona-btn.active {
       background: var(--primary);
       color: #fff;
       border-color: var(--primary);
       box-shadow: 0 4px 15px var(--primary-glow);
     }
 
-    .arch-content {
+    .persona-content {
       display: none;
       animation: fadeIn 0.4s ease;
     }
 
-    .arch-content.active {
+    .persona-content.active {
       display: grid;
       grid-template-columns: 1.2fr 1fr;
       gap: 2.5rem;
     }
 
     @media (max-width: 900px) {
-      .arch-content.active {
+      .persona-content.active {
         grid-template-columns: 1fr;
       }
     }
 
-    .arch-detail h3 {
+    .persona-detail h3 {
       font-size: 1.8rem;
       font-weight: 800;
       margin-bottom: 1rem;
@@ -224,7 +224,7 @@
       gap: 0.5rem;
     }
 
-    .arch-detail p {
+    .persona-detail p {
       color: var(--text-muted);
       font-size: 1.05rem;
       margin-bottom: 1.5rem;
@@ -387,14 +387,14 @@
 
   <header>
     <div class="title-area">
-      <h1>6 AI Archetypes</h1>
+      <h1>6 AI Personas</h1>
       <p>Interactive Framework Guide & Best Practices</p>
     </div>
     <div class="badge-framework">Unified Stack v3.0</div>
   </header>
 
   <div style="max-width: 1200px; margin: 0 auto 2.5rem auto; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 10px 40px rgba(124, 77, 255, 0.15); transition: all 0.3s ease;">
-    <img src="./images/header.png" alt="6 AI Archetypes Banner" style="width: 100%; display: block; height: auto; object-fit: cover;">
+    <img src="./images/header.png" alt="6 AI Personas Banner" style="width: 100%; display: block; height: auto; object-fit: cover;">
   </div>
 
   <main>
@@ -416,32 +416,32 @@
         <div style="background: rgba(0, 230, 118, 0.03); border: 1px solid rgba(0, 230, 118, 0.15); padding: 1.5rem; border-radius: 12px;">
           <h4 style="margin-bottom: 0.5rem; color: var(--accent-green);">🏫 Pedagogical Growth</h4>
           <p style="font-size: 0.95rem; color: var(--text-muted);">
-            Ensures you aren't left with an opaque, modified codebase. The Teacher archetype steps in to break down architecture patterns, map callers, and challenge you with interactive follow-ups.
+            Ensures you aren't left with an opaque, modified codebase. The Mentor persona steps in to break down architecture patterns, map callers, and challenge you with interactive follow-ups.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Interactive Archetype Deep Dive -->
+    <!-- Interactive Persona Deep Dive -->
     <section class="card">
-      <h2 class="card-title"><span class="icon">🧭</span> Interactive Archetype Explorer</h2>
-      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Select an archetype below to explore its behavioral rules, safeguards, and output examples.</p>
+      <h2 class="card-title"><span class="icon">🧭</span> Interactive Persona Explorer</h2>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Select a persona below to explore its behavioral rules, safeguards, and output examples.</p>
       
-      <div class="archetype-selector">
-        <button class="arch-btn active" onclick="showArchetype(event, 'scholar')">🎓 1. Scholar</button>
-        <button class="arch-btn" onclick="showArchetype(event, 'analyst')">🕵️ 2. Analyst</button>
-        <button class="arch-btn" onclick="showArchetype(event, 'architect')">📐 3. Architect</button>
-        <button class="arch-btn" onclick="showArchetype(event, 'producer')">🛠️ 4. Producer</button>
-        <button class="arch-btn" onclick="showArchetype(event, 'auditor')">🛡️ 5. Auditor</button>
-        <button class="arch-btn" onclick="showArchetype(event, 'teacher')">🏫 6. Teacher</button>
+      <div class="persona-selector">
+        <button class="persona-btn active" onclick="showPersona(event, 'scholar')">🎓 1. Scholar</button>
+        <button class="persona-btn" onclick="showPersona(event, 'analyst')">🕵️ 2. Analyst</button>
+        <button class="persona-btn" onclick="showPersona(event, 'architect')">📐 3. Architect</button>
+        <button class="persona-btn" onclick="showPersona(event, 'producer')">🛠️ 4. Producer</button>
+        <button class="persona-btn" onclick="showPersona(event, 'auditor')">🛡️ 5. Auditor</button>
+        <button class="persona-btn" onclick="showPersona(event, 'teacher')">🏫 6. Teacher</button>
       </div>
 
       <!-- SCHOLAR CONTENT -->
-      <div id="arch-scholar" class="arch-content active">
-        <div class="arch-detail">
+      <div id="persona-scout" class="persona-content active">
+        <div class="persona-detail">
           <span class="rule-tag">Mandatory Grounding</span>
-          <h3>The Scholar <span class="badge-subagent">context-collector</span></h3>
-          <p>The Scholar establishes a verified knowledge baseline. Before drafting plans or proposing code structure, the Scholar must inspect the repository's starting state and documentation.</p>
+          <h3>The Scout <span class="badge-subagent">factual-grounder</span></h3>
+          <p>The Scout establishes a verified knowledge baseline. Before drafting plans or proposing code structure, the Scout must inspect the repository's starting state and documentation.</p>
           <ul class="checklist">
             <li>Checks local files and configuration rules (`AGENTS.md`, `CLAUDE.md`, `CONTEXT.md`).</li>
             <li>Executes web search or MCP lookups if 3rd-party dependencies are involved.</li>
@@ -458,8 +458,8 @@
       </div>
 
       <!-- ANALYST CONTENT -->
-      <div id="arch-analyst" class="arch-content">
-        <div class="arch-detail">
+      <div id="persona-analyst" class="persona-content">
+        <div class="persona-detail">
           <span class="rule-tag" style="background: rgba(255, 145, 0, 0.08); border-color: var(--accent-orange);">Interactive Grilling</span>
           <h3>The Analyst <span class="badge-subagent">idea-refiner</span></h3>
           <p>The Analyst challenges confirmation bias, pinpoints high-risk dependencies, and conducts an interactive dialogue (grilling session) to sharpen requirements before code is written.</p>
@@ -485,8 +485,8 @@
       </div>
 
       <!-- ARCHITECT CONTENT -->
-      <div id="arch-architect" class="arch-content">
-        <div class="arch-detail">
+      <div id="persona-architect" class="persona-content">
+        <div class="persona-detail">
           <span class="rule-tag" style="background: rgba(0, 176, 255, 0.08); border-color: var(--accent-blue);">Symmetrical Deconstruction</span>
           <h3>The Architect <span class="badge-subagent">planner</span></h3>
           <p>The Architect maps out the structural, interface, and test roadmap. This splits design thinking from code implementation.</p>
@@ -507,11 +507,11 @@ or would you prefer breakpoints at each transition?</pre>
       </div>
 
       <!-- PRODUCER CONTENT -->
-      <div id="arch-producer" class="arch-content">
-        <div class="arch-detail">
+      <div id="persona-builder" class="persona-content">
+        <div class="persona-detail">
           <span class="rule-tag" style="background: rgba(0, 230, 118, 0.08); border-color: var(--accent-green);">Critique Loop + Sandboxing</span>
-          <h3>The Producer <span class="badge-subagent">implementer</span></h3>
-          <p>The Producer runs the actual implementation swarms. To ensure state integrity, all operations are isolated in sandboxed directories and validated through rigorous unit-testing loops.</p>
+          <h3>The Builder <span class="badge-subagent">sandbox-builder</span></h3>
+          <p>The Builder runs the actual implementation swarms. To ensure state integrity, all operations are isolated in sandboxed directories and validated through rigorous unit-testing loops.</p>
           <ul class="checklist">
             <li>Isolates tasks in `.gemini/tasks/task-ID/` paths to avoid file conflicts.</li>
             <li>Uses an autonomous `Implement -> Test -> Critique` verification cycle.</li>
@@ -519,8 +519,8 @@ or would you prefer breakpoints at each transition?</pre>
           </ul>
         </div>
         <div>
-          <h4>Producer State Tracker</h4>
-          <pre><span class="code-comment"># 🛠️ Producer Execution Loop</span>
+          <h4>Builder State Tracker</h4>
+          <pre><span class="code-comment"># 🛠️ Builder Execution Loop</span>
 - Active Sandbox: `.gemini/tasks/task-402/`
 - Iteration: `2 / 3`
 - Test Output: <span style="color: var(--accent-red);">Failed (Import Error)</span>
@@ -529,11 +529,11 @@ or would you prefer breakpoints at each transition?</pre>
       </div>
 
       <!-- AUDITOR CONTENT -->
-      <div id="arch-auditor" class="arch-content">
-        <div class="arch-detail">
+      <div id="persona-sentry" class="persona-content">
+        <div class="persona-detail">
           <span class="rule-tag" style="background: rgba(255, 82, 82, 0.08); border-color: var(--accent-red);">Evidence & Citation</span>
-          <h3>The Auditor <span class="badge-subagent">critic</span></h3>
-          <p>The Auditor acts as a skeptical verifier, reviewing code and ensuring every decision is properly justified and mapped to verified logs.</p>
+          <h3>The Sentry <span class="badge-subagent">critic</span></h3>
+          <p>The Sentry acts as a skeptical verifier, reviewing code and ensuring every decision is properly justified and mapped to verified logs.</p>
           <ul class="checklist">
             <li>Conducts multi-axis code reviews (security, performance, architectural fit).</li>
             <li>Records and links outcomes to the **Evidence Ledger** (`EVIDENCE.md`).</li>
@@ -541,8 +541,8 @@ or would you prefer breakpoints at each transition?</pre>
           </ul>
         </div>
         <div>
-          <h4>Auditor Audit Log</h4>
-          <pre><span class="code-comment"># 🛡️ Auditor Audit Report</span>
+          <h4>Sentry Audit Log</h4>
+          <pre><span class="code-comment"># 🛡️ Sentry Audit Report</span>
 - Verified Codebase Diff: PASS `[E-219]`
 - Security Hardening Check: PASS `[E-220]`
 - Structural Risk Checklist: Complete.
@@ -551,11 +551,11 @@ or would you prefer breakpoints at each transition?</pre>
       </div>
 
       <!-- TEACHER CONTENT -->
-      <div id="arch-teacher" class="arch-content">
-        <div class="arch-detail">
+      <div id="persona-mentor" class="persona-content">
+        <div class="persona-detail">
           <span class="rule-tag" style="background: rgba(124, 77, 255, 0.08); border-color: var(--primary);">Mentorship & Pedagogy</span>
-          <h3>The Teacher <span class="badge-subagent">educator</span></h3>
-          <p>The Teacher translates completed code changes into accessible knowledge, mapping abstractions, explaining trade-offs, and ensuring you learn from every modification.</p>
+          <h3>The Mentor <span class="badge-subagent">educator</span></h3>
+          <p>The Mentor translates completed code changes into accessible knowledge, mapping abstractions, explaining trade-offs, and ensuring you learn from every modification.</p>
           <ul class="checklist">
             <li>Builds conceptual mental models with Mermaid.js architecture diagrams.</li>
             <li>Annotates critical code sections line-by-line.</li>
@@ -618,19 +618,19 @@ before the lock releases? How did we handle that on L48?</pre>
   </main>
 
   <footer style="max-width: 1200px; margin: 3rem auto 0 auto; text-align: center; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border-color); padding-top: 2rem;">
-    Advanced Agentic Coding Framework &copy; 2026. Consolidating the Vector and 5 AI Archetypes.
+    Advanced Agentic Coding Framework &copy; 2026. Consolidating the Vector and 6 AI Personas.
   </footer>
 
   <script>
-    function showArchetype(event, archetypeId) {
+    function showPersona(event, personaId) {
       // Deactivate all archetype selector buttons
-      document.querySelectorAll('.arch-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.persona-btn').forEach(btn => btn.classList.remove('active'));
       // Hide all archetype content panels
-      document.querySelectorAll('.arch-content').forEach(panel => panel.classList.remove('active'));
+      document.querySelectorAll('.persona-content').forEach(panel => panel.classList.remove('active'));
 
       // Activate clicked button and target panel
       event.currentTarget.classList.add('active');
-      document.getElementById('arch-' + archetypeId).classList.add('active');
+      document.getElementById('persona-' + personaId).classList.add('active');
     }
 
     let simStep = 1;
