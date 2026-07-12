@@ -90,9 +90,64 @@ flowchart TD
 
 ---
 
+## 🔄 State Checkpoint & Error Recovery Protocol (Self-Resuming State Machine)
+
+To guarantee runtime resilience against technical/system errors (such as process terminations, network timeouts, context truncation, or environment restarts), you MUST implement and maintain a continuous file-based "working memory." This protocol grounds your execution in physical, verifiable artifacts, preventing context loss and eliminating hallucination in long-running tasks.
+
+### 1. File-Based State Infrastructure
+At the very beginning of the run (before starting the Scout stage), check for, create, or update the following state files inside the task directory or workspace root (specifically `.gemini/tasks/state_journal.json` and `.gemini/tasks/task.md`):
+*   **`task.md` (Human-Readable Checklist)**: A live-updated markdown file tracking task progress. Every checkbox MUST correspond to a specific milestone, annotated with its sequence, target persona, and current status.
+*   **`state_journal.json` (Structured JSON State)**: A rigid data structure used as a programmatic source of truth. It stores metadata, confirmed user decisions, discovered codebase trees, active subagent conversation IDs, and generated evidence hashes.
+
+#### Strict State Schema for `state_journal.json`
+```json
+{
+  "active_persona": "Scout | Analyst | Architect | Builder | Sentry | Mentor",
+  "goal_statement": "The ultimate high-level success metric",
+  "workspace_context": {
+    "scanned_files": ["/absolute/path/to/key_file.py"],
+    "environment_metadata": { "python_version": "3.13" }
+  },
+  "user_confirmed_decisions": {
+    "design_selections": {},
+    "architectural_approvals": {}
+  },
+  "milestones": [
+    {
+      "id": "M-01",
+      "name": "Milestone Name",
+      "persona": "Scout",
+      "status": "pending | in_progress | completed",
+      "completed_at": "ISO-8601-Timestamp",
+      "evidence_id": "[E-XYZ]",
+      "logs": ["precise output summaries or compilation logs"]
+    }
+  ],
+  "error_recovery": {
+    "backtrack_count": 0,
+    "last_error_log": "detailed traceback or crash dump",
+    "last_known_stable_checkpoint": "M-01"
+  }
+}
+```
+
+### 2. The Recovery & Context Hydration Loop (First Step on Turn)
+Before executing any codebase edits or proposing any new action, you MUST run this hydration loop:
+1.  **Detect State Files**: Execute `read_file` or check for the existence of `.gemini/tasks/state_journal.json` and `.gemini/tasks/task.md`.
+2.  **Hydrate Context**: If they exist, read their contents. Populate your system state with the active persona, completed milestones, already confirmed user answers, and previously scouted files.
+3.  **Resume Execution**: Immediately resume execution from the first incomplete checkbox in `task.md`. Do NOT repeat expensive file scans, re-ask completed user questions, or re-generate already complete modules.
+4.  **Zero-Loss Recovery**: If a crash occurs mid-turn, your first prompt in the new session will automatically point you to the local `.gemini/tasks/state_journal.json` as the unassailable source of truth.
+
+### 3. Immediate Commit-on-Action
+You MUST update and save both state files immediately after completing *any* action or stage transition:
+*   Never wait for a breakpoint or a turn boundary to update these files.
+*   When a file is created, a test runs, or a decision is made, write the update to disk using `replace_file_content` or `write_to_file`.
+
+---
+
 ## 🚦 Breakpoint Check-in Protocol
 
-When step-by-step breakpoints are active, pause execution after completing the work of each persona stage. Output a brief check-in status block formatted **EXACTLY** as follows:
+When step-by-step breakpoints are active, pause execution after completing the work of each persona stage. Before pausing, ensure that `state_journal.json` and `task.md` have been updated and synced to disk. Output a brief check-in status block formatted **EXACTLY** as follows:
 
 ```
 I've concluded the [persona] stage and [actions taken] - the output is visible at [asset]. Revise or proceed?
@@ -100,6 +155,7 @@ I've concluded the [persona] stage and [actions taken] - the output is visible a
 
 *   **[persona]**: The stage just completed (Scout, Analyst, Architect, Builder, Sentry, Mentor).
 *   **[actions taken]**: A concise bulleted or 1-2 sentence summary of accomplishments and cited evidence.
-*   **[asset]**: Clickable absolute markdown file link to the active working file or artifact.
+*   **[asset]**: Clickable absolute markdown file link to the active working file, state journal, or artifact (e.g., `[.gemini/tasks/task.md](file:///path/to/task.md)`).
 
 **CRITICAL RULE**: After outputting this check-in message, you **MUST** immediately stop calling tools and wait for user approval before beginning the next stage.
+

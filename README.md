@@ -51,7 +51,7 @@ flowchart LR
 ## 📁 Repository Structure
 
 ```
-skills-6-archetypes/
+skills-6-personas/
 ├── README.md               # This comprehensive guide
 ├── docs/
 │   ├── guide.html          # SOTA local interactive user guide
