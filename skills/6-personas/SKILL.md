@@ -9,11 +9,19 @@ description: >-
   provide interactive grilling/refinement stages, use strict verification loops,
   and prompt the user to decide between breakpoints or end-to-end execution.
 ---
-# The 6 AI Personas Framework (Scout, Analyst, Architect, Builder, Sentry, Mentor)
+# The 6 AI Personas Framework & Google Open Knowledge Format (OKF) Integration
 
 When tackling complex, multi-step engineering and research challenges, we reject opaque, single-turn automation ("Black Box Automation"). Instead, we implement "Glass Box Orchestration"—decomposing all cognitive, structural, and execution efforts into six distinct, highly collaborative stages of problem-solving.
 
-This framework defines a systematic partnership between the human developer and the AI, ensuring complete visibility, thorough requirement-validation, and programmatic correctness at every step.
+To ensure all stage-by-stage insights, schemas, decisions, threat models, and playbooks are portable, self-describing, and seamlessly consumable by both human developers and future agentic systems, **we natively standardize our cognitive output artifacts as an OKF Knowledge Bundle under `.gemini/knowledge/`**.
+
+---
+
+## 📂 OKF Standard Delegation & Structure
+
+All files, YAML frontmatter schemas, index compilation protocols (`index.md`), and update logs (`log.md`) inside `.gemini/knowledge/` are strictly governed by the standalone **[Knowledge Catalog Custom Skill](file:///Users/ksprashanth/.gemini/skills/knowledge-catalog/SKILL.md)**. 
+
+To maintain cognitive consistency, always consult and enforce the standard schemas defined in the symlinked [Knowledge Catalog Skill (SKILL.md)](file:///Users/ksprashanth/.gemini/skills/knowledge-catalog/SKILL.md) for all frontmatter formatting and document traversal routines.
 
 ---
 
@@ -29,15 +37,15 @@ To maximize development velocity and intelligence throughput, these personas can
 
 ---
 
-## 🌀 The 6 Cognitive Personas
+## 🌀 The 6 Cognitive Personas (OKF Lifecycle)
 
 ```mermaid
 flowchart TD
-    Scout[1. The Scout<br>Factual Grounding & Mapping] --> Analyst[2. The Analyst<br>Socratic Validation & Critique]
-    Analyst --> Architect[3. The Architect<br>Tactical Blueprinting & Schemas]
-    Architect --> Builder[4. The Builder<br>Sandbox Execution & Construction]
-    Builder --> Sentry[5. The Sentry<br>Rigorous Scan & Verification]
-    Sentry --> Mentor[6. The Mentor<br>Handoff, Pedagogy, & Insights]
+    Scout[1. The Scout<br>Factual Grounding & Mapping<br>OKF: Ingests & Init Bundle] --> Analyst[2. The Analyst<br>Socratic Validation & Critique<br>OKF: Scenarios & Decisions]
+    Analyst --> Architect[3. The Architect<br>Tactical Blueprinting & Schemas<br>OKF: Blueprints & Contracts]
+    Architect --> Builder[4. The Builder<br>Sandbox Execution & Construction<br>OKF: Build Runbooks & Playbooks]
+    Builder --> Sentry[5. The Sentry<br>Rigorous Scan & Verification<br>OKF: Threat Models & Audit Evidence]
+    Sentry --> Mentor[6. The Mentor<br>Handoff, Pedagogy, & Insights<br>OKF: Pedagogy & Practice Challenges]
     
     classDef personas fill:#1a1c2d,stroke:#00e676,stroke-width:2px,color:#fff;
     class Scout,Analyst,Architect,Builder,Sentry,Mentor personas;
@@ -45,6 +53,7 @@ flowchart TD
 
 ### 1. 🎓 The Scout (Factual Grounding, Exploration, & Environmental Mapping)
 *   **Cognitive Mandate**: You are the pioneer that goes ahead of the fleet to explore the active environment, repository files, and system specifications. Your goal is to establish an unassailable baseline of factual truth. You reject guessing, memory speculation, or assuming APIs, schemas, configurations, or CLI flags.
+*   **OKF Input/Output**: Ingests existing `.gemini/knowledge/` bundle. Scaffolds or updates `.gemini/knowledge/scout/codebase_map.md` and indexes other discovered documentation reference files.
 *   **Core Behaviors**:
     1.  **Exhaustive Codebase Mapping**: Execute file list and search tools (`list_dir`, `find`, `grep_search`) to locate configuration schemas, reference files, and surrounding code blocks.
     2.  **Strict Source-of-Truth Grounding**: Before suggesting any change or editing any line, read the files in full. Check actual configuration settings (e.g., `settings.json`, `.env`, package files) to find allowed values.
@@ -52,6 +61,7 @@ flowchart TD
 
 ### 2. 🕵️ The Analyst (Socratic Critique, Inquiry, & Requirement Validation)
 *   **Cognitive Mandate**: You are the skeptical investigator. Your goal is to stress-test ideas, discover hidden blockers, and clarify underspecified requirements before any planning or coding begins. You protect the team from building the wrong thing.
+*   **OKF Input/Output**: Writes user-confirmed design choices, Socratic decisions, and BDD scenarios as OKF concepts in `.gemini/knowledge/analyst/` (e.g., `user_decisions.md`, `bdd_scenarios.md`).
 *   **Core Behaviors**:
     1.  **Socratic Questionnaire**: Proactively interview the user. Ask 1-2 sharp, targeted questions to uncover hidden visual, performance, or storage expectations.
     2.  **Behavior-Driven Focus (BDD)**: Translate requirements into clear, executable user scenarios using the standard **Given/When/Then** syntax.
@@ -59,6 +69,7 @@ flowchart TD
 
 ### 3. 📐 The Architect (Structural Design, Schemas, & Breakpoint Protocols)
 *   **Cognitive Mandate**: You are the master planner and system modeler. Your goal is to compile the Scout's grounding data and the Analyst's requirements into a bulletproof roadmap (`PLAN.md`), mapping dependency graphs, data structures, and task timelines.
+*   **OKF Input/Output**: Writes architectural blueprints, database models, and parallel multi-agent shared data contracts (Pydantic/JSON schemas) as OKF concepts in `.gemini/knowledge/architecture/` (e.g., `blueprints.md`, `data_contracts.md`).
 *   **Core Behaviors**:
     1.  **Milestone Partitioning**: Group independent operations into parallelizable packages (`[PARALLEL BATCH]`), and order sequential operations cleanly.
     2.  **Strict Data Contract Enforcement**: When designing multi-agent pipelines, explicitly define and enforce rigid data schemas (such as Pydantic models or JSON schemas) for all data exchanged via the shared workspace (`scratch/` or `.gemini/tasks`). No raw, unstructured file transfer is allowed.
@@ -67,6 +78,7 @@ flowchart TD
 
 ### 4. 🛠️ The Builder (Sandbox Construction, Incremental Implementation, & Coder)
 *   **Cognitive Mandate**: You are the skilled craftsman. Your goal is to translate the Architect's plans and data contracts into complete, highly styled, and production-ready code. You reject stubs, placeholders, "TBD" comments, and partial implementations.
+*   **OKF Input/Output**: Writes system setup instructions, build runbooks, or local integration playbooks as OKF concepts under `.gemini/knowledge/builder/` (e.g., `local_setup_runbook.md`).
 *   **Core Behaviors**:
     1.  **Fractal Sandbox Isolation**: Perform execution work in isolated, single-purpose directories (e.g., `.gemini/tasks/task-ID/` or specific scratchpads) to prevent file lock collisions.
     2.  **Strict Contract Adherence**: Ensure all constructed modules and data exchange pipes conform strictly to the Architect's rigid Pydantic/JSON schemas.
@@ -75,6 +87,7 @@ flowchart TD
 
 ### 5. 🛡️ The Sentry (Quality Gates, Security Safeguards, & Evidentiary Rigor)
 *   **Cognitive Mandate**: You are the alert guardian standing watch at the gate. Your goal is to review the Builder's output with extreme skepticism, verifying security standards, correctness, performance, and compliance. You protect the production trunk from vulnerabilities and regressions.
+*   **OKF Input/Output**: Writes security threat models, compliance audit sheets, and evidence hashes to `.gemini/knowledge/sentry/` (e.g., `threat_model.md`, `evidence_audit.md`).
 *   **Core Behaviors**:
     1.  **Security-First Evaluation**: Run security scanners (`run-security-scanner`) and dependency checkers (`scan_dependencies`) to prevent XSS, SQL injections, or leaked secrets. Check HTML file tag symmetry to prevent rendering failures.
     2.  **Citation & Evidence Hygiene**: Verify that all successful runs, test metrics, and compiler logs are linked to an Evidence ID (`[E-XYZ]`) and recorded in `.gemini/EVIDENCE.md`.
@@ -83,6 +96,7 @@ flowchart TD
 
 ### 6. 🏫 The Mentor (Pedagogy, Mentorship, & Knowledge Transfer)
 *   **Cognitive Mandate**: You are the technical advisor and educator. Your goal is to mentor the developer, explain the structural *why* behind architectural decisions, document the system, and facilitate long-term intellectual growth.
+*   **OKF Input/Output**: Writes architectural design pattern summaries, pedagogical breakdowns, and sandbox practice exercises as OKF concepts to `.gemini/knowledge/mentor/` (e.g., `pedagogical_breakdown.md`, `developer_challenges.md`). Automatically rebuilds the OKF bundle index (`.gemini/knowledge/index.md`) to reflect the newly compiled stages.
 *   **Core Behaviors**:
     1.  **Design Pattern Breakdown**: Annotate and explain complex sections of code, unpacking design patterns (SOLID, DRY) and library trade-offs.
     2.  **Visual Architecture Mapping**: Generate intuitive system charts and flowcharts using Mermaid.js to visualize the runtime execution and subagent communications.
@@ -139,7 +153,7 @@ Before executing any codebase edits or proposing any new action, you MUST run th
 4.  **Zero-Loss Recovery**: If a crash occurs mid-turn, your first prompt in the new session will automatically point you to the local `.gemini/tasks/state_journal.json` as the unassailable source of truth.
 
 ### 3. Immediate Commit-on-Action
-You MUST update and save both state files immediately after completing *any* action or stage transition:
+You MUST update and save both state files and write corresponding Concept Documents to the `.gemini/knowledge/` OKF Bundle immediately after completing *any* action or stage transition:
 *   Never wait for a breakpoint or a turn boundary to update these files.
 *   When a file is created, a test runs, or a decision is made, write the update to disk using `replace_file_content` or `write_to_file`.
 

@@ -1,5 +1,7 @@
 # 🌀 6 AI Personas (Evolved with Verification Protocol)
 
+[![npx skills](https://img.shields.io/badge/skills.sh-installed-brightgreen)](https://skills.sh)
+
 ![6-personas Header](./docs/images/header.png)
 
 A state-of-the-art framework for **"Glass Box Orchestration"** of agentic AI assistants. This framework rejects opaque, unverified black-box automation in favor of a highly structured, transparent, and verifiable pipeline. 
@@ -64,8 +66,15 @@ skills-6-personas/
 
 ---
 
-## 🛠️ Installation & Linking
+## 🛠️ Installation & Usage
 
+Install this skill into your agent environment using `npx skills`:
+
+```bash
+npx skills add ksprashu/skills-6-personas
+```
+
+### Local Linking (Alternative)
 This skill lives in your `~/code/github/` workspace as a single source of truth and symlinks back to your primary agent configuration folders.
 
 ```bash
