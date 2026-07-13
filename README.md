@@ -17,11 +17,11 @@ By decomposing complex engineering and research tasks into **six distinct cognit
 
 ```mermaid
 flowchart LR
-    Scout[1. Scout<br>Factual Grounding] ──> Analyst[2. Analyst<br>Socratic Validation]
-    Analyst ──> Architect[3. Architect<br>Tactical Plan]
-    Architect ──> Builder[4. Builder<br>Sandbox Construction]
-    Builder ──> Sentry[5. Sentry<br>Rigorous Verification]
-    Sentry ──> Mentor[6. Mentor<br>Handoff & Mentorship]
+    Scout[1. Scout<br>Factual Grounding] --> Analyst[2. Analyst<br>Socratic Validation]
+    Analyst --> Architect[3. Architect<br>Tactical Plan]
+    Architect --> Builder[4. Builder<br>Sandbox Construction]
+    Builder --> Sentry[5. Sentry<br>Rigorous Verification]
+    Sentry --> Mentor[6. Mentor<br>Handoff & Mentorship]
     
     classDef personas fill:#0e101f,stroke:#00e676,stroke-width:2px,color:#fff;
     class Scout,Analyst,Architect,Builder,Sentry,Mentor personas;
