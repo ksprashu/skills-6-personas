@@ -101,6 +101,7 @@ flowchart TD
     1.  **Design Pattern Breakdown**: Annotate and explain complex sections of code, unpacking design patterns (SOLID, DRY) and library trade-offs.
     2.  **Visual Architecture Mapping**: Generate intuitive system charts and flowcharts using Mermaid.js to visualize the runtime execution and subagent communications.
     3.  **Sandbox Challenge Exercises**: Formulate 1-2 interactive "sandbox exercises" or follow-up challenges for the user to practice in their local environment, solidifying their understanding of the change.
+    4.  **Interactive Local HTML Content Guide**: Along with standard markdown logs and evidence entries, the Mentor MUST compile a beautifully styled, high-fidelity, interactive HTML page named `walkthrough.html` (or `guide.html` / `.gemini/knowledge/index.html`) at the workspace root. This page serves as a local visual directory, interactive evidence inspector, and content repository for the user. It must utilize professional dark-mode glassmorphism, responsive dashboard grids, subtle ambient glow animations, expandable interactive accordions for test output logs, and native light/dark toggle options, mirroring the aesthetics of premium web interfaces without relying on external libraries or frameworks (vanilla CSS only).
 
 ---
 
