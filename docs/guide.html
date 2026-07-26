@@ -444,15 +444,15 @@
       <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Select a persona below to explore its behavioral rules, safeguards, and output examples.</p>
       
       <div class="persona-selector">
-        <button class="persona-btn active" onclick="showPersona(event, 'scholar')">🎓 1. Scholar</button>
+        <button class="persona-btn active" onclick="showPersona(event, 'scout')">🎓 1. Scout</button>
         <button class="persona-btn" onclick="showPersona(event, 'analyst')">🕵️ 2. Analyst</button>
         <button class="persona-btn" onclick="showPersona(event, 'architect')">📐 3. Architect</button>
-        <button class="persona-btn" onclick="showPersona(event, 'producer')">🛠️ 4. Producer</button>
-        <button class="persona-btn" onclick="showPersona(event, 'auditor')">🛡️ 5. Auditor</button>
-        <button class="persona-btn" onclick="showPersona(event, 'teacher')">🏫 6. Teacher</button>
+        <button class="persona-btn" onclick="showPersona(event, 'builder')">🛠️ 4. Builder</button>
+        <button class="persona-btn" onclick="showPersona(event, 'sentry')">🛡️ 5. Sentry</button>
+        <button class="persona-btn" onclick="showPersona(event, 'mentor')">🏫 6. Mentor</button>
       </div>
 
-      <!-- SCHOLAR CONTENT -->
+      <!-- SCOUT CONTENT -->
       <div id="persona-scout" class="persona-content active">
         <div class="persona-detail">
           <span class="rule-tag">Mandatory Grounding</span>
@@ -522,7 +522,7 @@ or would you prefer breakpoints at each transition?</pre>
         </div>
       </div>
 
-      <!-- PRODUCER CONTENT -->
+      <!-- BUILDER CONTENT -->
       <div id="persona-builder" class="persona-content">
         <div class="persona-detail">
           <span class="rule-tag" style="background: rgba(0, 230, 118, 0.08); border-color: var(--accent-green);">Critique Loop + Sandboxing</span>
@@ -544,7 +544,7 @@ or would you prefer breakpoints at each transition?</pre>
         </div>
       </div>
 
-      <!-- AUDITOR CONTENT -->
+      <!-- SENTRY CONTENT -->
       <div id="persona-sentry" class="persona-content">
         <div class="persona-detail">
           <span class="rule-tag" style="background: rgba(255, 82, 82, 0.08); border-color: var(--accent-red);">Evidence & Citation</span>
@@ -566,7 +566,7 @@ or would you prefer breakpoints at each transition?</pre>
         </div>
       </div>
 
-      <!-- TEACHER CONTENT -->
+      <!-- MENTOR CONTENT -->
       <div id="persona-mentor" class="persona-content">
         <div class="persona-detail">
           <span class="rule-tag" style="background: rgba(124, 77, 255, 0.08); border-color: var(--primary);">Mentorship & Pedagogy</span>
@@ -621,7 +621,7 @@ before the lock releases? How did we handle that on L48?</pre>
           </ul>
         </div>
         <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 12px;">
-          <h4 style="color: var(--accent-red); margin-bottom: 0.5rem;">🛡️ Auditing & Teaching</h4>
+          <h4 style="color: var(--accent-red); margin-bottom: 0.5rem;">🛡️ Verification & Mentorship</h4>
           <ul class="checklist">
             <li>`code-review-and-quality`: Strict multi-axis code audits.</li>
             <li>`security-and-hardening`: Mitigates XSS, injection, or leak bugs.</li>
